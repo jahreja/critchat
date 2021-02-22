@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./chat.css">
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="chat.js"></script></script>
+</head>
+
+
+
+
+
+
+<header><h3 id="header-message">Welcome to the Crit Space!</h3></header>
+
+<div id="parent">
+
+  <div class="container">
+    <div class="wrapper">
+      
+      <div id="upload-image">
+        <img id="source-image" src="IMG_3276.JPG">
+      </div>
+    </div>
+  </div>
+
+  <div id="button-container">
+    <button type="button" id="like"><i class="fas fa-thumbs-up"></i></button>
+    <button type="button" id="heart"><i class="fas fa-heart"></i></button>
+    <button type="button" id="star"><i class="fas fa-star"></i></button>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-wrapper">
+
+      <div id="message-container">
+        
+      </div>
+
+      <form id="chat-box">
+        <input id="chat-input" type="text" autocomplete="off" placeholder="Enter your message...">
+        <button id="send" type="submit"><i class="fas fa-comment"></i></button>
+      </form>
+    </div>
+    
+  </div>
+
+</div>
+
+<!--script type="module">
+  
+  import { Base64 } from 'https://cdn.jsdelivr.net/npm/js-base64@3.6.0/base64.mjs';
+
+  window.onload = function(){
+
+    const sourceImageData = localStorage.getItem("imgData");
+    const decodeSourceData = Base64.atob(sourceImageData);
+    document.getElementById("source-image").src = decodeSourceData;
+    console.log(document.getElementById("source-image"));
+  }
+
+  
+</script-->
+
+
+<body>
+</body>
+
+
+
+</html>

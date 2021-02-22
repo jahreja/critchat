@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./hp-style.css"
+
+</head>
+
+<script></script>
+
+<body>
+    
+    <div class="container">
+        <header>
+            <h1>Virtual Critique</h1>
+            <h4>You are the host! Upload a piece of work below.</h4>
+        </header>
+
+        <div class="wrapper">
+            <div class="image">
+                <img src="" alt="" id="upload-image">
+            </div>
+            <div class="content">
+                <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <div class="text">No file selected</div>
+            </div>
+            <div id="cancel-btn"><i class="fas fa-times"></i></div>
+            <div class="file-name">Uploaded.</div>
+        </div>
+        <input id="default-btn" type="file" hidden>
+        <button onclick="defaultBtnActive()" id="custom-btn" type="button">Choose a file</button>
+        <button onclick="location.href='chat.html'" id="start-btn" type="button">Open a Critique Space</button>
+    </div>
+
+    <script>
+
+        //localStorage.clear();
+
+        const wrapper = document.querySelector(".wrapper")
+        const defaultBtn = document.getElementById("default-btn");
+        const customBtn = document.getElementById("custom-btn");
+        const cancelBtn = document.getElementById("cancel-btn");
+        const fileName = document.querySelector(".file-name");
+        const startButton = document.getElementById("start-btn");
+        const img = document.querySelector("img")
+
+        function defaultBtnActive(){
+            defaultBtn.click();
+        }
+
+        defaultBtn.addEventListener("change", function(){
+            const file = this.files[0];
+            
+            if (file){
+                localStorage.clear();
+                const reader = new FileReader();
+                reader.onload = function(){
+                    const result = reader.result;
+                    img.src = result;
+                    wrapper.classList.add("active");
+                    fileName.classList.add("active");
+                    startButton.classList.add("active");
+                    
+                    const uploadImage = img;
+                    const imgData = getBase64Image(uploadImage);
+                    localStorage.setItem("imgData", getBase64Image(img));
+                    console.log(img)
+                    console.log(imgData)
+
+
+                }
+                cancelBtn.addEventListener("click", function(){
+                    img.src = "";
+                    fileName.classList.remove("active");
+                    wrapper.classList.remove("active");
+                    startButton.classList.remove("active");
+                    localStorage.clear();
+                })
+                reader.readAsDataURL(file);
+            }
+            if (this.value){
+                fileName.textContent = "File Uploaded.";
+            }
+        })
+
+        function getBase64Image(img) {
+            var canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            var dataURL = canvas.toDataURL("image/jpg");
+
+            return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+        }
+
+        function fetchimage () {
+            var dataImage = localStorage.getItem('imgData');
+            img.src = "data:image/png;base64," + dataImage;
+            // If you don't process the url with getBase64Image, you can just use
+            // img.src = dataImage;
+        }
+
+
+    </script>
+
+    
+
+</body>
+</html>
