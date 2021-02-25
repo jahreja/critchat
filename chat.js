@@ -9,8 +9,6 @@ const starButton = document.getElementById("star");
 
 const name = prompt("Enter your name:");
 
-
-
 appendMessage("You joined");
 socket.emit("new-user", name);
 
